@@ -1,0 +1,55 @@
+@startuml
+
+title __E-House__ components
+
+package "User Interfaces" {
+	[Desktop]
+	[Web Interface]
+}
+
+package "Remote Services" {
+	[Service 1]
+	[Service N]
+}
+
+package "Field Systems" {
+	[FS 1]
+	[FS N]
+}
+
+package "Message Queue" {
+	() "Adapter 1"
+	() "Adapter N"
+
+	[Channel]
+}
+
+database "Web DB"{
+	() MSSQL1
+}
+
+database "Data DB"{
+	() MSSQL2
+}
+
+[Web Server]
+[Control System]
+
+[Desktop] - [Web Server]
+[Web Interface] - [Web Server]
+[MSSQL1] - [Web Server]
+
+[Control System] - [Web Server]
+
+[Service N] - [Control System]
+[Service 1] - [Control System]
+[MSSQL2] - [Control System]
+[Channel] - [Control System]
+
+[Adapter N] - [Channel]
+[Adapter 1] - [Channel]
+
+[FS N] - [Adapter N]
+[FS 1] - [Adapter 1]
+
+@enduml

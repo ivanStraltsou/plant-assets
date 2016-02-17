@@ -1,0 +1,17 @@
+@startuml
+
+title __Domain Model.__ Revenue Recognition.
+
+[-> Contract: calculateRecognitions()
+activate Contract
+	Contract -> Product: calculateRecognitions()
+	activate Product
+		Product -> RecognitionStrategy: calculateRecognitions(contract)
+		activate RecognitionStrategy
+			create RevenueRecognitions
+			RecognitionStrategy -> RevenueRecognitions: new()
+		deactivate RecognitionStrategy
+	deactivate Product
+deactivate Contract
+
+@enduml

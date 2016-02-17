@@ -1,0 +1,21 @@
+@startuml
+
+[-> RecognitionService: calculateRecognitions(contractId)
+activate RecognitionService
+
+	RecognitionService -> DataGateway: findContract(contractId)
+
+	activate DataGateway
+		create ContractResultSet
+		DataGateway -> ContractResultSet
+	deactivate DataGateway
+
+	RecognitionService -> ContractResultSet
+
+	activate ContractResultSet
+	deactivate ContractResultSet
+
+	RecognitionService -> DataGateway: insertRevenueRecognition(...)
+deactivate RecognitionService
+
+@enduml
